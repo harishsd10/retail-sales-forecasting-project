@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Retail Sales Forecasting & Business Analytics | Lakshana R</title>
+  <style>
+/*
+  Retail Sales Forecasting & Business Analytics - Orange Theme CSS
+  Author: Lakshana R, Kumaraguru College of Liberal Arts and Science, Coimbatore
+*/
+
+:root {
+  --primary-orange: #EA580C;       /* Main vibrant accent orange */
+  --primary-orange-hover: #C2410C;
+  --primary-orange-light: #FF8533;
+  --orange-soft-bg: #FFF7ED;       /* Soft pastel orange for active cards */
+  --orange-border: #FED7AA;
+  --orange-glow: rgba(234, 88, 12, 0.18);
+  
+  --bg-page: #F8FAFC;              /* Clean white / light slate background */
+  --bg-card: #FFFFFF;              /* Crisp white cards */
+  --bg-subtle: #F1F5F9;
+  
+  --text-main: #0F172A;            /* Deep dark slate text */
+  --text-muted: #64748B;           /* Readable secondary slate text */
+  --text-dim: #94A3B8;
+  
+  --border-card: #E2E8F0;
+  --border-divider: #CBD5E1;
+  
+  --success: #16A34A;
+  --danger: #DC2626;
+  
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  --shadow-card: 0 4px 12px rgba(15, 23, 42, 0.05), 0 1px 3px rgba(15, 23, 42, 0.03);
+  --shadow-hover: 0 10px 24px rgba(234, 88, 12, 0.08), 0 2px 6px rgba(15, 23, 42, 0.04);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', Helvetica, Arial, sans-serif;
+}
+
+body {
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  min-height: 100vh;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Header */
+.app-header {
+  background-color: #FFFFFF;
+  border-bottom: 1px solid var(--border-card);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.header-inner {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 16px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.brand-block {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand-logo {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, var(--primary-orange) 0%, #F97316 100%);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px var(--orange-glow);
+}
+
+.brand-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+}
+
+.brand-subtitle {
+  font-size: 0.84rem;
+  color: var(--primary-orange);
+  font-weight: 500;
+  margin-top: 1px;
+}
+
+.header-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.academic-badge {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+}
+
+.author-tag {
+  font-size: 0.85rem;
+  color: var(--text-main);
+}
+
+.author-tag strong {
+  color: var(--primary-orange);
+}
+
+.college-tag {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Currency Toggle */
+.currency-toggle {
+  display: flex;
+  align-items: center;
+  background: var(--bg-subtle);
+  padding: 3px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-card);
+}
+
+.curr-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  padding: 0 8px;
+}
+
+.curr-btn {
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.curr-btn.active {
+  background: var(--primary-orange);
+  color: #FFFFFF;
+  box-shadow: 0 2px 6px var(--orange-glow);
+}
+
+/* Download ZIP Button */
+.download-zip-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--primary-orange);
+  color: #FFFFFF !important;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 2px 8px var(--orange-glow);
+  transition: all 0.2s ease;
+}
+
+.download-zip-btn:hover {
+  background: var(--primary-orange-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(234, 88, 12, 0.3);
+}
+
+/* Main Container */
+.dashboard-container {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 28px 28px 60px;
+}
+
+.section-block {
+  margin-bottom: 28px;
+}
+
+/* Card Container */
+.card-container {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  padding: 26px 28px;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-container:hover {
+  box-shadow: var(--shadow-hover);
+}
+
+.section-header {
+  margin-bottom: 22px;
+}
+
+.badge-pill {
+  display: inline-block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+  background: var(--orange-soft-bg);
+  color: var(--primary-orange);
+  border: 1px solid var(--orange-border);
+  padding: 3px 10px;
+  border-radius: 9999px;
+  margin-bottom: 8px;
+}
+
+.section-heading {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+}
+
+.section-subheading {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.section-subheading-bold {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+/* KPI Cards Grid */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.kpi-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  padding: 20px 18px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  box-shadow: var(--shadow-card);
+  transition: all 0.2s ease;
+}
+
+.kpi-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--orange-border);
+}
+
+.kpi-card.highlight-card {
+  background: linear-gradient(145deg, #FFFFFF 0%, #FFF7ED 100%);
+  border-color: var(--orange-border);
+}
+
+.kpi-icon-wrap {
+  width: 42px;
+  height: 42px;
+  background: var(--orange-soft-bg);
+  border: 1px solid var(--orange-border);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.kpi-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.kpi-title {
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+
+.kpi-value {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-top: 3px;
+  letter-spacing: -0.02em;
+}
+
+.kpi-note {
+  font-size: 0.76rem;
+  color: var(--text-dim);
+  margin-top: 4px;
+}
+
+.orange-highlight {
+  color: var(--primary-orange) !important;
+}
+
+/* Month Selection Wrapper */
+.forecast-control-wrapper {
+  background: var(--orange-soft-bg);
+  border: 1px solid var(--orange-border);
+  border-radius: var(--radius-md);
+  padding: 20px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.dropdown-control-box {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.dropdown-label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.select-wrapper {
+  position: relative;
+  min-width: 240px;
+}
+
+.custom-select {
+  width: 100%;
+  appearance: none;
+  background-color: #FFFFFF;
+  border: 2px solid var(--primary-orange);
+  border-radius: var(--radius-sm);
+  padding: 10px 38px 10px 14px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-main);
+  outline: none;
+  cursor: pointer;
+  box-shadow: 0 2px 8px var(--orange-glow);
+  transition: all 0.2s ease;
+}
+
+.custom-select:focus {
+  border-color: var(--primary-orange-hover);
+  box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.25);
+}
+
+.select-wrapper::after {
+  content: '▼';
+  font-size: 0.7rem;
+  color: var(--primary-orange);
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.dropdown-helper {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+/* Forecast Result Cards (Actual, Predicted, Difference) */
+.forecast-results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.result-card {
+  border-radius: var(--radius-md);
+  padding: 24px;
+  border: 1px solid var(--border-card);
+  background: #FFFFFF;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.2s ease;
+}
+
+.result-card:hover {
+  transform: translateY(-2px);
+}
+
+.result-card.actual-card {
+  border-left: 4px solid var(--text-main);
+}
+
+.result-card.predicted-card {
+  border-left: 4px solid var(--primary-orange);
+  background: linear-gradient(145deg, #FFFFFF 0%, #FFF7ED 100%);
+  border-color: var(--orange-border);
+}
+
+.result-card.diff-card {
+  border-left: 4px solid #F59E0B;
+}
+
+.result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.result-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+.result-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: var(--bg-subtle);
+  color: var(--text-muted);
+}
+
+.result-badge.badge-orange {
+  background: var(--orange-soft-bg);
+  color: var(--primary-orange);
+  border: 1px solid var(--orange-border);
+}
+
+.result-value {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -0.03em;
+  margin-bottom: 6px;
+}
+
+.result-footer {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+/* Charts */
+.chart-wrapper {
+  position: relative;
+  height: 380px;
+  width: 100%;
+}
+
+.chart-wrapper-small {
+  position: relative;
+  height: 280px;
+  width: 100%;
+}
+
+.chart-legend-box {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-card);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot-actual { background-color: #0F172A; }
+.dot-pred { background-color: var(--primary-orange); }
+.dot-active { background-color: #F59E0B; box-shadow: 0 0 6px #F59E0B; }
+
+.two-col-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .two-col-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Model Performance Grid */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.metric-card {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  position: relative;
+}
+
+.metric-tag {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--primary-orange);
+  margin-bottom: 4px;
+}
+
+.metric-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.metric-number {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin: 6px 0 8px;
+  letter-spacing: -0.02em;
+}
+
+.metric-desc {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* Explanation / Workflow Grid */
+.explanation-container {
+  background: linear-gradient(145deg, #FFFFFF 0%, #FFF7ED 100%);
+  border-color: var(--orange-border);
+}
+
+.workflow-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.step-card {
+  background: #FFFFFF;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  box-shadow: var(--shadow-card);
+  position: relative;
+}
+
+.step-number {
+  width: 28px;
+  height: 28px;
+  background: var(--primary-orange);
+  color: #FFFFFF;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.step-title {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 6px;
+}
+
+.step-text {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+/* Footer */
+.app-footer {
+  background: #FFFFFF;
+  border-top: 1px solid var(--border-card);
+  padding: 32px 28px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.footer-inner p {
+  margin-bottom: 4px;
+}
+
+.footer-note {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  margin-top: 8px;
+}
+
+</style>
+  <!-- Chart.js local or CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- Top Navigation & Brand Header -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="brand-block">
+        <div class="brand-logo">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+            <polyline points="17 6 23 6 23 12"></polyline>
+          </svg>
+        </div>
+        <div>
+          <h1 class="brand-title">Retail Sales Forecasting & Business Analytics</h1>
+          <p class="brand-subtitle">Machine Learning-Based Sales Forecasting for Retail Business</p>
+        </div>
+      </div>
+      
+      <div class="header-meta">
+        <div class="academic-badge">
+          <span class="author-tag">Project by: <strong>LAKSHANA R</strong></span>
+          <span class="college-tag">Kumaraguru College of Liberal Arts and Science, Coimbatore</span>
+        </div>
+        <div class="currency-toggle">
+          <span class="curr-label">Currency:</span>
+          <button id="curr-inr" class="curr-btn active" onclick="setCurrency('₹')">₹ INR</button>
+          <button id="curr-usd" class="curr-btn" onclick="setCurrency('$')">$ USD</button>
+        </div>
+        <a href="/download" class="download-zip-btn" title="Download all project files as ZIP">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Download ZIP
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="dashboard-container">
+
+    <!-- KPI Cards Grid -->
+    <section class="section-block">
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#EA580C" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+          </div>
+          <div class="kpi-meta">
+            <span class="kpi-title">Total Historical Sales</span>
+            <span class="kpi-value" id="kpi-total-sales">2,297,200.86</span>
+            <span class="kpi-note">Across 48 monthly periods</span>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#EA580C" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <div class="kpi-meta">
+            <span class="kpi-title">Average Monthly Sales</span>
+            <span class="kpi-value" id="kpi-avg-sales">47,858.35</span>
+            <span class="kpi-note">Actual monthly average</span>
+          </div>
+        </div>
+
+        <div class="kpi-card highlight-card">
+          <div class="kpi-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#EA580C" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          </div>
+          <div class="kpi-meta">
+            <span class="kpi-title">Highest Sales Month</span>
+            <span class="kpi-value" id="kpi-high-month">November 2017</span>
+            <span class="kpi-note" id="kpi-high-val">Sales: 118,447.82</span>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#EA580C" stroke-width="2"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg>
+          </div>
+          <div class="kpi-meta">
+            <span class="kpi-title">Lowest Sales Month</span>
+            <span class="kpi-value" id="kpi-low-month">February 2014</span>
+            <span class="kpi-note" id="kpi-low-val">Sales: 4,519.89</span>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#EA580C" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <div class="kpi-meta">
+            <span class="kpi-title">Model Accuracy (R² Score)</span>
+            <span class="kpi-value orange-highlight">0.7102</span>
+            <span class="kpi-note">Linear Regression Model</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 1 & 3: MAIN REQUIREMENT – MONTH-WISE SALES FORECASTING -->
+    <section class="section-block">
+      <div class="card-container">
+        <div class="section-header">
+          <div class="badge-pill">Interactive ML Prediction</div>
+          <h2 class="section-heading">Monthly Sales Forecast</h2>
+          <p class="section-subheading">Select any actual month from the dataset to compute and compare actual historical revenue against the trained Linear Regression model prediction.</p>
+        </div>
+
+        <div class="forecast-control-wrapper">
+          <div class="dropdown-control-box">
+            <label for="month-select" class="dropdown-label">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#EA580C" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              Select Month:
+            </label>
+            <div class="select-wrapper">
+              <select id="month-select" class="custom-select" onchange="onMonthSelected()">
+                  <option value="January 2014" selected>January 2014</option>
+  <option value="February 2014" >February 2014</option>
+  <option value="March 2014" >March 2014</option>
+  <option value="April 2014" >April 2014</option>
+  <option value="May 2014" >May 2014</option>
+  <option value="June 2014" >June 2014</option>
+  <option value="July 2014" >July 2014</option>
+  <option value="August 2014" >August 2014</option>
+  <option value="September 2014" >September 2014</option>
+  <option value="October 2014" >October 2014</option>
+  <option value="November 2014" >November 2014</option>
+  <option value="December 2014" >December 2014</option>
+  <option value="January 2015" >January 2015</option>
+  <option value="February 2015" >February 2015</option>
+  <option value="March 2015" >March 2015</option>
+  <option value="April 2015" >April 2015</option>
+  <option value="May 2015" >May 2015</option>
+  <option value="June 2015" >June 2015</option>
+  <option value="July 2015" >July 2015</option>
+  <option value="August 2015" >August 2015</option>
+  <option value="September 2015" >September 2015</option>
+  <option value="October 2015" >October 2015</option>
+  <option value="November 2015" >November 2015</option>
+  <option value="December 2015" >December 2015</option>
+  <option value="January 2016" >January 2016</option>
+  <option value="February 2016" >February 2016</option>
+  <option value="March 2016" >March 2016</option>
+  <option value="April 2016" >April 2016</option>
+  <option value="May 2016" >May 2016</option>
+  <option value="June 2016" >June 2016</option>
+  <option value="July 2016" >July 2016</option>
+  <option value="August 2016" >August 2016</option>
+  <option value="September 2016" >September 2016</option>
+  <option value="October 2016" >October 2016</option>
+  <option value="November 2016" >November 2016</option>
+  <option value="December 2016" >December 2016</option>
+  <option value="January 2017" >January 2017</option>
+  <option value="February 2017" >February 2017</option>
+  <option value="March 2017" >March 2017</option>
+  <option value="April 2017" >April 2017</option>
+  <option value="May 2017" >May 2017</option>
+  <option value="June 2017" >June 2017</option>
+  <option value="July 2017" >July 2017</option>
+  <option value="August 2017" >August 2017</option>
+  <option value="September 2017" >September 2017</option>
+  <option value="October 2017" >October 2017</option>
+  <option value="November 2017" >November 2017</option>
+  <option value="December 2017" >December 2017</option>
+
+              </select>
+            </div>
+          </div>
+          <div class="dropdown-helper">
+            Data points detected: <strong>48 Monthly Cycles</strong> (Chronological 2014 – 2017)
+          </div>
+        </div>
+
+        <!-- Result Cards (Actual Sales, Predicted Sales, Difference) -->
+        <div class="forecast-results-grid">
+          <div class="result-card actual-card">
+            <div class="result-header">
+              <span class="result-title">Actual Sales</span>
+              <span class="result-badge">From Dataset</span>
+            </div>
+            <div class="result-value" id="display-actual">Loading...</div>
+            <div class="result-footer" id="meta-actual">Recorded revenue for selected month</div>
+          </div>
+
+          <div class="result-card predicted-card">
+            <div class="result-header">
+              <span class="result-title">Predicted Sales</span>
+              <span class="result-badge badge-orange">Linear Regression</span>
+            </div>
+            <div class="result-value orange-highlight" id="display-predicted">Loading...</div>
+            <div class="result-footer" id="meta-predicted">Forecast generated from trained model</div>
+          </div>
+
+          <div class="result-card diff-card">
+            <div class="result-header">
+              <span class="result-title">Difference</span>
+              <span class="result-badge" id="diff-badge">Variance</span>
+            </div>
+            <div class="result-value" id="display-diff">Loading...</div>
+            <div class="result-footer" id="meta-diff">|Actual - Predicted|</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: ACTUAL VS PREDICTED SALES LINE GRAPH -->
+    <section class="section-block">
+      <div class="card-container">
+        <div class="section-header">
+          <div class="badge-pill">Model Visualization</div>
+          <h2 class="section-heading">Actual vs Predicted Sales</h2>
+          <p class="section-subheading">Chronological comparison showing how closely the Linear Regression trend tracks actual month-by-month retail sales across 2014-2017.</p>
+        </div>
+
+        <div class="chart-wrapper">
+          <canvas id="actualVsPredictedChart"></canvas>
+        </div>
+        
+        <div class="chart-legend-box">
+          <div class="legend-item"><span class="legend-dot dot-actual"></span> <strong>Actual Sales:</strong> Historical sales revenue recorded in dataset.</div>
+          <div class="legend-item"><span class="legend-dot dot-pred"></span> <strong>Predicted Sales:</strong> Linear Regression model predicted revenue.</div>
+          <div class="legend-item"><span class="legend-dot dot-active"></span> <strong>Selected Month:</strong> Marked with highlight on graph.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TWO-COLUMN DASHBOARD VISUALIZATIONS -->
+    <section class="section-block">
+      <div class="two-col-grid">
+        <!-- Monthly Sales Trend Chart -->
+        <div class="card-container">
+          <div class="section-header">
+            <div class="badge-pill">Trend Intelligence</div>
+            <h3 class="section-subheading-bold">Monthly Sales Trend</h3>
+            <p class="section-subheading">Cumulative monthly trajectory illustrating annual retail seasonality spikes in Q4.</p>
+          </div>
+          <div class="chart-wrapper-small">
+            <canvas id="monthlyTrendChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Sales by Category Chart -->
+        <div class="card-container">
+          <div class="section-header">
+            <div class="badge-pill">Product Breakdown</div>
+            <h3 class="section-subheading-bold">Sales by Relevant Category</h3>
+            <p class="section-subheading">Empirical revenue distribution across Technology, Office Supplies, and Furniture.</p>
+          </div>
+          <div class="chart-wrapper-small">
+            <canvas id="categoryChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: MODEL PERFORMANCE METRICS -->
+    <section class="section-block">
+      <div class="card-container">
+        <div class="section-header">
+          <div class="badge-pill">Statistical Evaluation</div>
+          <h2 class="section-heading">Model Performance</h2>
+          <p class="section-subheading">Evaluation metrics computed strictly on the hold-out test set using the actual retail dataset.</p>
+        </div>
+
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-tag">Goodness of Fit</div>
+            <div class="metric-name">R² Score</div>
+            <div class="metric-number orange-highlight" id="metric-r2">0.7102</div>
+            <div class="metric-desc">Proportion of sales variance explained by the regression features (71.0%).</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-tag">Average Error</div>
+            <div class="metric-name">MAE</div>
+            <div class="metric-number" id="metric-mae">6,109.60</div>
+            <div class="metric-desc">Mean Absolute Error between actual and predicted monthly revenue.</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-tag">Variance Penalty</div>
+            <div class="metric-name">MSE</div>
+            <div class="metric-number" id="metric-mse">63,850,168</div>
+            <div class="metric-desc">Mean Squared Error measuring the average squared difference.</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-tag">Root Standard Error</div>
+            <div class="metric-name">RMSE</div>
+            <div class="metric-number" id="metric-rmse">7,990.63</div>
+            <div class="metric-desc">Root Mean Squared Error in sales currency units.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 9: HOW THE PREDICTION WORKS (EDUCATIONAL / PRESENTATION) -->
+    <section class="section-block">
+      <div class="card-container explanation-container">
+        <div class="section-header">
+          <div class="badge-pill">Academic Methodology</div>
+          <h2 class="section-heading">How the Prediction Works</h2>
+          <p class="section-subheading">Step-by-step machine learning workflow designed for retail business sales analytics.</p>
+        </div>
+
+        <div class="workflow-steps-grid">
+          <div class="step-card">
+            <div class="step-number">1</div>
+            <h4 class="step-title">Dataset Ingestion</h4>
+            <p class="step-text">Historical sales data is loaded from the uploaded dataset, verifying order dates, quantities, discounts, and revenues.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">2</div>
+            <h4 class="step-title">Data Preprocessing</h4>
+            <p class="step-text">Transactions are aggregated by month and year. Time indices, calendar months, quarters, and operational averages are created.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">3</div>
+            <h4 class="step-title">Model Training</h4>
+            <p class="step-text">A Linear Regression model is trained using an 80/20 train/test split to fit the underlying secular trend and seasonality patterns.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">4</div>
+            <h4 class="step-title">Feature Extraction</h4>
+            <p class="step-text">When you choose a month from the dropdown, that specific month's feature parameters are retrieved and passed to the model.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">5</div>
+            <h4 class="step-title">Model Forecast</h4>
+            <p class="step-text">The Linear Regression model generates the predicted sales value via the linear coefficients and intercept.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">6</div>
+            <h4 class="step-title">Variance Analysis</h4>
+            <p class="step-text">Actual sales and predicted sales are compared, displaying the exact monetary difference and percentage variance.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Clean Footer -->
+  <footer class="app-footer">
+    <div class="footer-inner">
+      <p><strong>Retail Sales Forecasting and Business Analytics System</strong></p>
+      <p>Research Project by <strong>Lakshana R</strong> • Kumaraguru College of Liberal Arts and Science, Coimbatore</p>
+      <p class="footer-note">Machine Learning Model: Linear Regression • Theme: Orange Executive Presentation</p>
+    </div>
+  </footer>
+
+  
+<script>
+// Embedded server data for standalone viewing
+window.EMBEDDED_DASHBOARD_DATA = {"author": "LAKSHANA R", "available_months": ["January 2014", "February 2014", "March 2014", "April 2014", "May 2014", "June 2014", "July 2014", "August 2014", "September 2014", "October 2014", "November 2014", "December 2014", "January 2015", "February 2015", "March 2015", "April 2015", "May 2015", "June 2015", "July 2015", "August 2015", "September 2015", "October 2015", "November 2015", "December 2015", "January 2016", "February 2016", "March 2016", "April 2016", "May 2016", "June 2016", "July 2016", "August 2016", "September 2016", "October 2016", "November 2016", "December 2016", "January 2017", "February 2017", "March 2017", "April 2017", "May 2017", "June 2017", "July 2017", "August 2017", "September 2017", "October 2017", "November 2017", "December 2017"], "category_sales": {"Furniture": 741999.8, "Office Supplies": 719047.03, "Technology": 836154.03}, "institution": "Kumaraguru College of Liberal Arts and Science, Coimbatore", "kpis": {"avg_monthly_sales": 47858.35, "highest_month": {"month_name": "November 2017", "sales": 118447.82}, "lowest_month": {"month_name": "February 2014", "sales": 4519.89}, "model_metrics": {"mae": 6109.6, "mse": 63850167.74, "r2_score": 0.7102, "rmse": 7990.63}, "total_predicted_sales": 2263932.15, "total_sales": 2297200.86}, "months_data": [{"abs_difference": 4657.56, "actual_sales": 14236.9, "difference": -4657.56, "discount": 12.7, "month": 1, "month_index": 1, "month_name": "January 2014", "predicted_sales": 18894.46, "profit": 2450.19, "quantity": 284, "year": 2014}, {"abs_difference": 8128.63, "actual_sales": 4519.89, "difference": -8128.63, "discount": 17.6, "month": 2, "month_index": 2, "month_name": "February 2014", "predicted_sales": 12648.52, "profit": 862.31, "quantity": 159, "year": 2014}, {"abs_difference": 14884.17, "actual_sales": 55691.01, "difference": 14884.17, "discount": 16.8, "month": 3, "month_index": 3, "month_name": "March 2014", "predicted_sales": 40806.84, "profit": 498.73, "quantity": 585, "year": 2014}, {"abs_difference": 4635.26, "actual_sales": 28295.35, "difference": -4635.26, "discount": 11.0, "month": 4, "month_index": 4, "month_name": "April 2014", "predicted_sales": 32930.61, "profit": 3488.84, "quantity": 536, "year": 2014}, {"abs_difference": 6542.73, "actual_sales": 23648.29, "difference": -6542.73, "discount": 15.5, "month": 5, "month_index": 5, "month_name": "May 2014", "predicted_sales": 30191.02, "profit": 2738.71, "quantity": 466, "year": 2014}, {"abs_difference": 28.29, "actual_sales": 34595.13, "difference": 28.29, "discount": 17.2, "month": 6, "month_index": 6, "month_name": "June 2014", "predicted_sales": 34566.84, "profit": 4976.52, "quantity": 521, "year": 2014}, {"abs_difference": 528.28, "actual_sales": 33946.39, "difference": -528.28, "discount": 17.2, "month": 7, "month_index": 7, "month_name": "July 2014", "predicted_sales": 34474.67, "profit": -841.48, "quantity": 550, "year": 2014}, {"abs_difference": 8657.07, "actual_sales": 27909.47, "difference": -8657.07, "discount": 13.1, "month": 8, "month_index": 8, "month_name": "August 2014", "predicted_sales": 36566.54, "profit": 5318.1, "quantity": 609, "year": 2014}, {"abs_difference": 17732.39, "actual_sales": 81777.35, "difference": 17732.39, "discount": 16.0, "month": 9, "month_index": 9, "month_name": "September 2014", "predicted_sales": 64044.96, "profit": 8328.1, "quantity": 1000, "year": 2014}, {"abs_difference": 1904.87, "actual_sales": 31453.39, "difference": -1904.87, "discount": 16.0, "month": 10, "month_index": 10, "month_name": "October 2014", "predicted_sales": 33358.26, "profit": 3448.26, "quantity": 573, "year": 2014}, {"abs_difference": 2357.18, "actual_sales": 78628.72, "difference": 2357.18, "discount": 15.1, "month": 11, "month_index": 11, "month_name": "November 2014", "predicted_sales": 76271.54, "profit": 9292.13, "quantity": 1219, "year": 2014}, {"abs_difference": 965.37, "actual_sales": 69545.62, "difference": 965.37, "discount": 19.1, "month": 12, "month_index": 12, "month_name": "December 2014", "predicted_sales": 68580.25, "profit": 8983.57, "quantity": 1079, "year": 2014}, {"abs_difference": 2671.11, "actual_sales": 18174.08, "difference": 2671.11, "discount": 17.8, "month": 1, "month_index": 13, "month_name": "January 2015", "predicted_sales": 15502.97, "profit": -3281.01, "quantity": 236, "year": 2015}, {"abs_difference": 1544.89, "actual_sales": 11951.41, "difference": -1544.89, "discount": 13.0, "month": 2, "month_index": 14, "month_name": "February 2015", "predicted_sales": 13496.3, "profit": 2813.85, "quantity": 239, "year": 2015}, {"abs_difference": 6294.22, "actual_sales": 38726.25, "difference": 6294.22, "discount": 14.0, "month": 3, "month_index": 15, "month_name": "March 2015", "predicted_sales": 32432.03, "profit": 9732.1, "quantity": 515, "year": 2015}, {"abs_difference": 313.87, "actual_sales": 34195.21, "difference": 313.87, "discount": 17.6, "month": 4, "month_index": 16, "month_name": "April 2015", "predicted_sales": 33881.34, "profit": 4187.5, "quantity": 543, "year": 2015}, {"abs_difference": 5400.39, "actual_sales": 30131.69, "difference": -5400.39, "discount": 16.6, "month": 5, "month_index": 17, "month_name": "May 2015", "predicted_sales": 35532.08, "profit": 4667.87, "quantity": 575, "year": 2015}, {"abs_difference": 4984.27, "actual_sales": 24797.29, "difference": -4984.27, "discount": 17.2, "month": 6, "month_index": 18, "month_name": "June 2015", "predicted_sales": 29781.56, "profit": 3335.56, "quantity": 486, "year": 2015}, {"abs_difference": 3664.2, "actual_sales": 28765.33, "difference": -3664.2, "discount": 17.0, "month": 7, "month_index": 19, "month_name": "July 2015", "predicted_sales": 32429.53, "profit": 3288.65, "quantity": 557, "year": 2015}, {"abs_difference": 2396.49, "actual_sales": 36898.33, "difference": 2396.49, "discount": 15.6, "month": 8, "month_index": 20, "month_name": "August 2015", "predicted_sales": 34501.84, "profit": 5355.81, "quantity": 598, "year": 2015}, {"abs_difference": 1919.76, "actual_sales": 64595.92, "difference": -1919.76, "discount": 14.1, "month": 9, "month_index": 21, "month_name": "September 2015", "predicted_sales": 66515.68, "profit": 8209.16, "quantity": 1086, "year": 2015}, {"abs_difference": 3492.76, "actual_sales": 31404.92, "difference": -3492.76, "discount": 16.2, "month": 10, "month_index": 22, "month_name": "October 2015", "predicted_sales": 34897.68, "profit": 2817.37, "quantity": 631, "year": 2015}, {"abs_difference": 4448.7, "actual_sales": 75972.56, "difference": -4448.7, "discount": 16.2, "month": 11, "month_index": 23, "month_name": "November 2015", "predicted_sales": 80421.26, "profit": 12474.79, "quantity": 1310, "year": 2015}, {"abs_difference": 2857.43, "actual_sales": 74919.52, "difference": 2857.43, "discount": 13.7, "month": 12, "month_index": 24, "month_name": "December 2015", "predicted_sales": 72062.09, "profit": 8016.97, "quantity": 1203, "year": 2015}, {"abs_difference": 674.8, "actual_sales": 18542.49, "difference": -674.8, "discount": 13.3, "month": 1, "month_index": 25, "month_name": "January 2016", "predicted_sales": 19217.29, "profit": 2824.82, "quantity": 358, "year": 2016}, {"abs_difference": 8924.08, "actual_sales": 22978.81, "difference": 8924.08, "discount": 9.6, "month": 2, "month_index": 26, "month_name": "February 2016", "predicted_sales": 14054.73, "profit": 5004.58, "quantity": 306, "year": 2016}, {"abs_difference": 15181.82, "actual_sales": 51715.88, "difference": 15181.82, "discount": 19.1, "month": 3, "month_index": 27, "month_name": "March 2016", "predicted_sales": 36534.06, "profit": 3611.97, "quantity": 579, "year": 2016}, {"abs_difference": 2041.87, "actual_sales": 38750.04, "difference": 2041.87, "discount": 15.6, "month": 4, "month_index": 28, "month_name": "April 2016", "predicted_sales": 36708.17, "profit": 2977.81, "quantity": 635, "year": 2016}, {"abs_difference": 3759.86, "actual_sales": 56987.73, "difference": 3759.86, "discount": 18.4, "month": 5, "month_index": 29, "month_name": "May 2016", "predicted_sales": 53227.87, "profit": 8662.15, "quantity": 863, "year": 2016}, {"abs_difference": 2663.02, "actual_sales": 40344.53, "difference": -2663.02, "discount": 13.9, "month": 6, "month_index": 30, "month_name": "June 2016", "predicted_sales": 43007.55, "profit": 4750.38, "quantity": 742, "year": 2016}, {"abs_difference": 3719.66, "actual_sales": 39261.96, "difference": -3719.66, "discount": 15.9, "month": 7, "month_index": 31, "month_name": "July 2016", "predicted_sales": 42981.62, "profit": 4432.88, "quantity": 758, "year": 2016}, {"abs_difference": 8609.1, "actual_sales": 31115.37, "difference": -8609.1, "discount": 18.6, "month": 8, "month_index": 32, "month_name": "August 2016", "predicted_sales": 39724.47, "profit": 2062.07, "quantity": 693, "year": 2016}, {"abs_difference": 6467.45, "actual_sales": 73410.02, "difference": -6467.45, "discount": 14.9, "month": 9, "month_index": 33, "month_name": "September 2016", "predicted_sales": 79877.47, "profit": 9328.66, "quantity": 1316, "year": 2016}, {"abs_difference": 18791.08, "actual_sales": 59687.75, "difference": 18791.08, "discount": 14.7, "month": 10, "month_index": 34, "month_name": "October 2016", "predicted_sales": 40896.67, "profit": 16243.14, "quantity": 767, "year": 2016}, {"abs_difference": 4788.92, "actual_sales": 79411.97, "difference": -4788.92, "discount": 15.8, "month": 11, "month_index": 35, "month_name": "November 2016", "predicted_sales": 84200.89, "profit": 4011.41, "quantity": 1406, "year": 2016}, {"abs_difference": 13308.91, "actual_sales": 96999.04, "difference": 13308.91, "discount": 13.5, "month": 12, "month_index": 36, "month_name": "December 2016", "predicted_sales": 83690.13, "profit": 17885.31, "quantity": 1414, "year": 2016}, {"abs_difference": 9886.53, "actual_sales": 43971.37, "difference": 9886.53, "discount": 16.1, "month": 1, "month_index": 37, "month_name": "January 2017", "predicted_sales": 34084.84, "profit": 7140.44, "quantity": 597, "year": 2017}, {"abs_difference": 1064.15, "actual_sales": 20301.13, "difference": 1064.15, "discount": 18.2, "month": 2, "month_index": 38, "month_name": "February 2017", "predicted_sales": 19236.98, "profit": 1613.87, "quantity": 363, "year": 2017}, {"abs_difference": 6927.48, "actual_sales": 58872.35, "difference": 6927.48, "discount": 13.1, "month": 3, "month_index": 39, "month_name": "March 2017", "predicted_sales": 51944.87, "profit": 14751.89, "quantity": 885, "year": 2017}, {"abs_difference": 6026.74, "actual_sales": 36521.54, "difference": -6026.74, "discount": 19.4, "month": 4, "month_index": 40, "month_name": "April 2017", "predicted_sales": 42548.28, "profit": 933.29, "quantity": 733, "year": 2017}, {"abs_difference": 6696.11, "actual_sales": 44261.11, "difference": -6696.11, "discount": 15.2, "month": 5, "month_index": 41, "month_name": "May 2017", "predicted_sales": 50957.22, "profit": 6342.58, "quantity": 887, "year": 2017}, {"abs_difference": 1737.92, "actual_sales": 52981.73, "difference": -1737.92, "discount": 17.2, "month": 6, "month_index": 42, "month_name": "June 2017", "predicted_sales": 54719.65, "profit": 8223.34, "quantity": 931, "year": 2017}, {"abs_difference": 98.5, "actual_sales": 45264.42, "difference": 98.5, "discount": 14.0, "month": 7, "month_index": 43, "month_name": "July 2017", "predicted_sales": 45165.92, "profit": 6952.62, "quantity": 840, "year": 2017}, {"abs_difference": 14902.84, "actual_sales": 63120.89, "difference": 14902.84, "discount": 14.4, "month": 8, "month_index": 44, "month_name": "August 2017", "predicted_sales": 48218.05, "profit": 9040.96, "quantity": 884, "year": 2017}, {"abs_difference": 12558.16, "actual_sales": 87866.65, "difference": -12558.16, "discount": 14.7, "month": 9, "month_index": 45, "month_name": "September 2017", "predicted_sales": 100424.81, "profit": 10991.56, "quantity": 1660, "year": 2017}, {"abs_difference": 13561.09, "actual_sales": 77776.92, "difference": 13561.09, "discount": 17.4, "month": 10, "month_index": 46, "month_name": "October 2017", "predicted_sales": 64215.83, "profit": 9275.28, "quantity": 1133, "year": 2017}, {"abs_difference": 7417.19, "actual_sales": 118447.82, "difference": 7417.19, "discount": 16.1, "month": 11, "month_index": 47, "month_name": "November 2017", "predicted_sales": 111030.63, "profit": 9690.1, "quantity": 1840, "year": 2017}, {"abs_difference": 18645.96, "actual_sales": 83829.32, "difference": -18645.96, "discount": 14.7, "month": 12, "month_index": 48, "month_name": "December 2017", "predicted_sales": 102475.28, "profit": 8483.35, "quantity": 1723, "year": 2017}], "status": "success"};
+
+/**
+ * Retail Sales Forecasting & Business Analytics - Frontend JavaScript
+ * Author: Lakshana R, Kumaraguru College of Liberal Arts and Science, Coimbatore
+ */
+
+let currentCurrency = '₹'; // Default to Indian Rupee (or $ via toggle)
+let dashboardData = null;
+let actualVsPredictedChartInstance = null;
+let monthlyTrendChartInstance = null;
+let categoryChartInstance = null;
+
+// Format Currency
+function formatMoney(amount, currency = currentCurrency) {
+  if (amount === null || amount === undefined || isNaN(amount)) return `${currency}0.00`;
+  const num = Number(amount);
+  return `${currency}${num.toLocaleString('en-IN', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  })}`;
+}
+
+// Currency Switcher
+function setCurrency(curr) {
+  currentCurrency = curr;
+  document.getElementById('curr-inr').classList.toggle('active', curr === '₹');
+  document.getElementById('curr-usd').classList.toggle('active', curr === '$');
+
+  if (dashboardData) {
+    updateKpisDisplay();
+    onMonthSelected();
+    if (actualVsPredictedChartInstance) actualVsPredictedChartInstance.update();
+    if (monthlyTrendChartInstance) monthlyTrendChartInstance.update();
+    if (categoryChartInstance) categoryChartInstance.update();
+  }
+}
+
+// Update KPI cards with selected currency
+function updateKpisDisplay() {
+  if (!dashboardData || !dashboardData.kpis) return;
+  const k = dashboardData.kpis;
+
+  document.getElementById('kpi-total-sales').textContent = formatMoney(k.total_sales);
+  document.getElementById('kpi-avg-sales').textContent = formatMoney(k.avg_monthly_sales);
+  document.getElementById('kpi-high-month').textContent = k.highest_month.month_name;
+  document.getElementById('kpi-high-val').textContent = `Sales: ${formatMoney(k.highest_month.sales)}`;
+  document.getElementById('kpi-low-month').textContent = k.lowest_month.month_name;
+  document.getElementById('kpi-low-val').textContent = `Sales: ${formatMoney(k.lowest_month.sales)}`;
+
+  // Metric numbers
+  document.getElementById('metric-r2').textContent = k.model_metrics.r2_score;
+  document.getElementById('metric-mae').textContent = formatMoney(k.model_metrics.mae);
+  document.getElementById('metric-mse').textContent = Number(k.model_metrics.mse).toLocaleString('en-IN', { maximumFractionDigits: 0 });
+  document.getElementById('metric-rmse').textContent = formatMoney(k.model_metrics.rmse);
+}
+
+// Load initial dashboard data from Flask API
+async function loadDashboardData() {
+  try {
+    let response = null;
+    try {
+      response = await fetch('/api/dashboard_data');
+    } catch(e) {}
+    if (response && response.ok) {
+      dashboardData = await response.json();
+    } else {
+      dashboardData = window.EMBEDDED_DASHBOARD_DATA;
+    }
+    
+    if (!response.ok) throw new Error('Network error loading dashboard data');
+    dashboardData = await response.json();
+
+    updateKpisDisplay();
+    initCharts();
+    onMonthSelected();
+  } catch (error) {
+    console.error('Error fetching dashboard data:', error);
+  }
+}
+
+// Handle Month Selection Change
+async function onMonthSelected() {
+  const selectEl = document.getElementById('month-select');
+  if (!selectEl) return;
+  const selectedMonth = selectEl.value;
+
+  try {
+    let response = null;
+    try {
+      response = await fetch(`/api/predict?month=${encodeURIComponent(selectedMonth)}`);
+    } catch(e) {}
+    let result = null;
+    if (response && response.ok) {
+      result = await response.json();
+    } else {
+      const item = dashboardData.months_data.find(x => x.month_name === selectedMonth) || dashboardData.months_data[0];
+      const diff = item.actual_sales - item.predicted_sales;
+      result = {
+        status: 'success',
+        month_name: item.month_name,
+        actual_sales: item.actual_sales,
+        predicted_sales: item.predicted_sales,
+        difference: diff,
+        abs_difference: Math.abs(diff),
+        difference_pct: ((diff / item.actual_sales) * 100).toFixed(2),
+        quantity: item.quantity,
+        discount_pct: item.discount,
+        profit: item.profit
+      };
+    }
+    
+    
+
+    if (result.status === 'success') {
+      // Display Actual Sales
+      document.getElementById('display-actual').textContent = formatMoney(result.actual_sales);
+      document.getElementById('meta-actual').textContent = `Quantity: ${result.quantity} units • Avg Discount: ${result.discount_pct}%`;
+
+      // Display Predicted Sales from Linear Regression
+      document.getElementById('display-predicted').textContent = formatMoney(result.predicted_sales);
+      document.getElementById('meta-predicted').textContent = `Linear Regression Model Output`;
+
+      // Display Difference
+      const diffVal = result.difference;
+      const absDiff = result.abs_difference;
+      const diffEl = document.getElementById('display-diff');
+      const badgeEl = document.getElementById('diff-badge');
+
+      if (diffVal >= 0) {
+        diffEl.textContent = `+${formatMoney(absDiff)}`;
+        diffEl.style.color = '#16A34A';
+        badgeEl.textContent = 'Actual > Predicted';
+        badgeEl.style.color = '#16A34A';
+        badgeEl.style.backgroundColor = '#DCFCE7';
+      } else {
+        diffEl.textContent = `-${formatMoney(absDiff)}`;
+        diffEl.style.color = '#EA580C';
+        badgeEl.textContent = 'Actual < Predicted';
+        badgeEl.style.color = '#EA580C';
+        badgeEl.style.backgroundColor = '#FFEDD5';
+      }
+
+      document.getElementById('meta-diff').textContent = `Variance: ${Math.abs(result.difference_pct)}% (${formatMoney(absDiff)})`;
+
+      // Highlight point on chart
+      highlightMonthOnChart(selectedMonth);
+    }
+  } catch (err) {
+    console.error('Prediction fetch error:', err);
+  }
+}
+
+// Highlight selected month on the main comparison chart
+function highlightMonthOnChart(selectedMonthName) {
+  if (!actualVsPredictedChartInstance || !dashboardData) return;
+  const labels = dashboardData.months_data.map(m => m.month_name);
+  const targetIndex = labels.indexOf(selectedMonthName);
+
+  if (targetIndex !== -1) {
+    // Generate point radius array
+    const pointRadii = labels.map((_, i) => (i === targetIndex ? 8 : 2.5));
+    const pointBorderWidths = labels.map((_, i) => (i === targetIndex ? 3 : 1));
+    const pointColors = labels.map((_, i) => (i === targetIndex ? '#F59E0B' : '#EA580C'));
+
+    actualVsPredictedChartInstance.data.datasets[1].pointRadius = pointRadii;
+    actualVsPredictedChartInstance.data.datasets[1].pointHoverRadius = 9;
+    actualVsPredictedChartInstance.data.datasets[1].pointBorderWidth = pointBorderWidths;
+    actualVsPredictedChartInstance.data.datasets[1].pointBackgroundColor = pointColors;
+    actualVsPredictedChartInstance.update();
+  }
+}
+
+// Initialize Visualizations using Chart.js
+function initCharts() {
+  if (!dashboardData || typeof Chart === 'undefined') return;
+
+  const months = dashboardData.months_data;
+  const labels = months.map(m => m.month_name);
+  const actualSales = months.map(m => m.actual_sales);
+  const predictedSales = months.map(m => m.predicted_sales);
+
+  Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
+  Chart.defaults.color = '#64748B';
+
+  // 1. Main Comparison Line Chart: Actual vs Predicted Sales
+  const ctxCompare = document.getElementById('actualVsPredictedChart');
+  if (ctxCompare) {
+    actualVsPredictedChartInstance = new Chart(ctxCompare, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: 'Actual Sales',
+            data: actualSales,
+            borderColor: '#0F172A',
+            backgroundColor: 'rgba(15, 23, 42, 0.04)',
+            borderWidth: 2.2,
+            tension: 0.25,
+            fill: false,
+            pointRadius: 2.5,
+            pointBackgroundColor: '#0F172A'
+          },
+          {
+            label: 'Predicted Sales (Linear Regression)',
+            data: predictedSales,
+            borderColor: '#EA580C',
+            backgroundColor: 'rgba(234, 88, 12, 0.08)',
+            borderWidth: 2.5,
+            borderDash: [5, 4],
+            tension: 0.25,
+            fill: true,
+            pointRadius: 2.5,
+            pointBackgroundColor: '#EA580C'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: 'index',
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: false // Using custom HTML legend
+          },
+          tooltip: {
+            backgroundColor: '#0F172A',
+            titleColor: '#FFFFFF',
+            bodyColor: '#F8FAFC',
+            padding: 12,
+            cornerRadius: 8,
+            callbacks: {
+              label: function(context) {
+                return ` ${context.dataset.label}: ${formatMoney(context.raw)}`;
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: { display: false },
+            ticks: {
+              maxRotation: 45,
+              minRotation: 45,
+              autoSkip: true,
+              maxTicksLimit: 14
+            }
+          },
+          y: {
+            grid: { color: '#F1F5F9' },
+            ticks: {
+              callback: function(val) {
+                return `${currentCurrency}${(val / 1000).toFixed(0)}k`;
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+
+  // 2. Monthly Sales Trend Bar / Area Chart
+  const ctxTrend = document.getElementById('monthlyTrendChart');
+  if (ctxTrend) {
+    monthlyTrendChartInstance = new Chart(ctxTrend, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: 'Monthly Revenue',
+            data: actualSales,
+            backgroundColor: 'rgba(234, 88, 12, 0.75)',
+            hoverBackgroundColor: '#EA580C',
+            borderRadius: 4
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: function(ctx) {
+                return ` Sales: ${formatMoney(ctx.raw)}`;
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: { display: false },
+            ticks: {
+              maxRotation: 45,
+              minRotation: 45,
+              autoSkip: true,
+              maxTicksLimit: 8
+            }
+          },
+          y: {
+            grid: { color: '#F1F5F9' },
+            ticks: {
+              callback: function(val) {
+                return `${currentCurrency}${(val / 1000).toFixed(0)}k`;
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+
+  // 3. Category Sales Doughnut Chart
+  const ctxCat = document.getElementById('categoryChart');
+  if (ctxCat && dashboardData.category_sales) {
+    const catLabels = Object.keys(dashboardData.category_sales);
+    const catValues = Object.values(dashboardData.category_sales);
+
+    categoryChartInstance = new Chart(ctxCat, {
+      type: 'doughnut',
+      data: {
+        labels: catLabels,
+        datasets: [
+          {
+            data: catValues,
+            backgroundColor: [
+              '#EA580C', // Vibrant Orange
+              '#F97316', // Lighter Orange
+              '#FB923C'  // Soft Amber
+            ],
+            borderColor: '#FFFFFF',
+            borderWidth: 3
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: {
+              padding: 14,
+              font: { size: 12, weight: '600' }
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function(ctx) {
+                return ` ${ctx.label}: ${formatMoney(ctx.raw)}`;
+              }
+            }
+          }
+        },
+        cutout: '62%'
+      }
+    });
+  }
+}
+
+// Start application
+window.addEventListener('DOMContentLoaded', () => {
+  loadDashboardData();
+});
+
+</script>
+
+</body>
+</html>
