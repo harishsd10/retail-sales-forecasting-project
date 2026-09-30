@@ -21,10 +21,19 @@ MODEL_PATH = os.path.join(BASE_DIR, "model.pkl")
 # Import our ML pipeline function
 from model import load_and_preprocess_data, train_linear_regression
 
-# Global in-memory cache for fast responsive queries
-print("Initializing dataset and ML model...")
-pipeline_data = train_linear_regression()
-model = pipeline_data['model']
+# Instant boot loader
+PIPELINE_JSON = os.path.join(BASE_DIR, "pipeline_data.json")
+
+if os.path.exists(PIPELINE_JSON) and os.path.exists(MODEL_PATH):
+    print("Loading precomputed pipeline data and trained model...")
+    with open(PIPELINE_JSON, "r", encoding="utf-8") as f:
+        pipeline_data = json.load(f)
+    model = joblib.load(MODEL_PATH)
+else:
+    print("Training ML model on startup...")
+    pipeline_data = train_linear_regression()
+    model = pipeline_data['model']
+
 feature_cols = pipeline_data['feature_cols']
 kpis = pipeline_data['kpis']
 months_data = pipeline_data['months_data']
