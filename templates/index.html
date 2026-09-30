@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Retail Sales Forecasting & Business Analytics | Lakshana R</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <!-- Chart.js local or CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- Top Navigation & Brand Header -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="brand-block">
+        <div class="brand-logo">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+            <polyline points="17 6 23 6 23 12"></polyline>
+          </svg>
+        </div>
+        <div>
+          <h1 class="brand-title">Retail Sales Forecasting & Business Analytics</h1>
+          <p class="brand-subtitle">Machine Learning-Based Sales Forecasting for Retail Business</p>
+        </div>
+      </div>
+      
+      <div class="header-meta">
+        <div class="academic-badge">
+          <span class="author-tag">Project by: <strong>LAKSHANA R</strong></span>
+          <span class="college-tag">Kumaraguru College of Liberal Arts and Science, Coimbatore</span>
+        </div>
+        <div class="currency-toggle">
+          <span class="curr-label">Currency:</span>
+          <button id="curr-inr" class="curr-btn active" onclick="setCurrency('₹')">₹ INR</button>
+          <button id="curr-usd" class="curr-btn" onclick="setCurrency('$')">$ USD</button>
+        </div>
+        <a href="/download" class="download-zip-btn" title="Download all project files as ZIP">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Download ZIP
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="dashboard-container">
+
+    <!-- KPI Cards Grid -->
+    <section class="section-block">
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#EA580C" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+          </div>
+          <div class="kpi-meta">
+            <span class="kpi-title">Total Historical Sales</span>
+            <span class="kpi-value" id="kpi-total-sales">{{ kpis.total_sales }}</span>
+            <span class="kpi-note">Across 48 monthly periods</span>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#EA580C" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <div class="kpi-meta">
+            <span class="kpi-title">Average Monthly Sales</span>
+            <span class="kpi-value" id="kpi-avg-sales">{{ kpis.avg_monthly_sales }}</span>
+            <span class="kpi-note">Actual monthly average</span>
+          </div>
+        </div>
+
+        <div class="kpi-card highlight-card">
+          <div class="kpi-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#EA580C" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          </div>
+          <div class="kpi-meta">
+            <span class="kpi-title">Highest Sales Month</span>
+            <span class="kpi-value" id="kpi-high-month">{{ kpis.highest_month.month_name }}</span>
+            <span class="kpi-note" id="kpi-high-val">{{ kpis.highest_month.sales }}</span>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#EA580C" stroke-width="2"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg>
+          </div>
+          <div class="kpi-meta">
+            <span class="kpi-title">Lowest Sales Month</span>
+            <span class="kpi-value" id="kpi-low-month">{{ kpis.lowest_month.month_name }}</span>
+            <span class="kpi-note" id="kpi-low-val">{{ kpis.lowest_month.sales }}</span>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#EA580C" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <div class="kpi-meta">
+            <span class="kpi-title">Model Accuracy (R² Score)</span>
+            <span class="kpi-value orange-highlight">{{ kpis.model_metrics.r2_score }}</span>
+            <span class="kpi-note">Linear Regression Model</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 1 & 3: MAIN REQUIREMENT – MONTH-WISE SALES FORECASTING -->
+    <section class="section-block">
+      <div class="card-container">
+        <div class="section-header">
+          <div class="badge-pill">Interactive ML Prediction</div>
+          <h2 class="section-heading">Monthly Sales Forecast</h2>
+          <p class="section-subheading">Select any actual month from the dataset to compute and compare actual historical revenue against the trained Linear Regression model prediction.</p>
+        </div>
+
+        <div class="forecast-control-wrapper">
+          <div class="dropdown-control-box">
+            <label for="month-select" class="dropdown-label">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#EA580C" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              Select Month:
+            </label>
+            <div class="select-wrapper">
+              <select id="month-select" class="custom-select" onchange="onMonthSelected()">
+                {% for m in available_months %}
+                  <option value="{{ m }}" {% if loop.first %}selected{% endif %}>{{ m }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <div class="dropdown-helper">
+            Data points detected: <strong>{{ available_months|length }} Monthly Cycles</strong> (Chronological 2014 – 2017)
+          </div>
+        </div>
+
+        <!-- Result Cards (Actual Sales, Predicted Sales, Difference) -->
+        <div class="forecast-results-grid">
+          <div class="result-card actual-card">
+            <div class="result-header">
+              <span class="result-title">Actual Sales</span>
+              <span class="result-badge">From Dataset</span>
+            </div>
+            <div class="result-value" id="display-actual">Loading...</div>
+            <div class="result-footer" id="meta-actual">Recorded revenue for selected month</div>
+          </div>
+
+          <div class="result-card predicted-card">
+            <div class="result-header">
+              <span class="result-title">Predicted Sales</span>
+              <span class="result-badge badge-orange">Linear Regression</span>
+            </div>
+            <div class="result-value orange-highlight" id="display-predicted">Loading...</div>
+            <div class="result-footer" id="meta-predicted">Forecast generated from trained model</div>
+          </div>
+
+          <div class="result-card diff-card">
+            <div class="result-header">
+              <span class="result-title">Difference</span>
+              <span class="result-badge" id="diff-badge">Variance</span>
+            </div>
+            <div class="result-value" id="display-diff">Loading...</div>
+            <div class="result-footer" id="meta-diff">|Actual - Predicted|</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: ACTUAL VS PREDICTED SALES LINE GRAPH -->
+    <section class="section-block">
+      <div class="card-container">
+        <div class="section-header">
+          <div class="badge-pill">Model Visualization</div>
+          <h2 class="section-heading">Actual vs Predicted Sales</h2>
+          <p class="section-subheading">Chronological comparison showing how closely the Linear Regression trend tracks actual month-by-month retail sales across 2014-2017.</p>
+        </div>
+
+        <div class="chart-wrapper">
+          <canvas id="actualVsPredictedChart"></canvas>
+        </div>
+        
+        <div class="chart-legend-box">
+          <div class="legend-item"><span class="legend-dot dot-actual"></span> <strong>Actual Sales:</strong> Historical sales revenue recorded in dataset.</div>
+          <div class="legend-item"><span class="legend-dot dot-pred"></span> <strong>Predicted Sales:</strong> Linear Regression model predicted revenue.</div>
+          <div class="legend-item"><span class="legend-dot dot-active"></span> <strong>Selected Month:</strong> Marked with highlight on graph.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TWO-COLUMN DASHBOARD VISUALIZATIONS -->
+    <section class="section-block">
+      <div class="two-col-grid">
+        <!-- Monthly Sales Trend Chart -->
+        <div class="card-container">
+          <div class="section-header">
+            <div class="badge-pill">Trend Intelligence</div>
+            <h3 class="section-subheading-bold">Monthly Sales Trend</h3>
+            <p class="section-subheading">Cumulative monthly trajectory illustrating annual retail seasonality spikes in Q4.</p>
+          </div>
+          <div class="chart-wrapper-small">
+            <canvas id="monthlyTrendChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Sales by Category Chart -->
+        <div class="card-container">
+          <div class="section-header">
+            <div class="badge-pill">Product Breakdown</div>
+            <h3 class="section-subheading-bold">Sales by Relevant Category</h3>
+            <p class="section-subheading">Empirical revenue distribution across Technology, Office Supplies, and Furniture.</p>
+          </div>
+          <div class="chart-wrapper-small">
+            <canvas id="categoryChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: MODEL PERFORMANCE METRICS -->
+    <section class="section-block">
+      <div class="card-container">
+        <div class="section-header">
+          <div class="badge-pill">Statistical Evaluation</div>
+          <h2 class="section-heading">Model Performance</h2>
+          <p class="section-subheading">Evaluation metrics computed strictly on the hold-out test set using the actual retail dataset.</p>
+        </div>
+
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-tag">Goodness of Fit</div>
+            <div class="metric-name">R² Score</div>
+            <div class="metric-number orange-highlight" id="metric-r2">{{ kpis.model_metrics.r2_score }}</div>
+            <div class="metric-desc">Proportion of sales variance explained by the regression features (71.0%).</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-tag">Average Error</div>
+            <div class="metric-name">MAE</div>
+            <div class="metric-number" id="metric-mae">{{ kpis.model_metrics.mae }}</div>
+            <div class="metric-desc">Mean Absolute Error between actual and predicted monthly revenue.</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-tag">Variance Penalty</div>
+            <div class="metric-name">MSE</div>
+            <div class="metric-number" id="metric-mse">{{ kpis.model_metrics.mse }}</div>
+            <div class="metric-desc">Mean Squared Error measuring the average squared difference.</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-tag">Root Standard Error</div>
+            <div class="metric-name">RMSE</div>
+            <div class="metric-number" id="metric-rmse">{{ kpis.model_metrics.rmse }}</div>
+            <div class="metric-desc">Root Mean Squared Error in sales currency units.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 9: HOW THE PREDICTION WORKS (EDUCATIONAL / PRESENTATION) -->
+    <section class="section-block">
+      <div class="card-container explanation-container">
+        <div class="section-header">
+          <div class="badge-pill">Academic Methodology</div>
+          <h2 class="section-heading">How the Prediction Works</h2>
+          <p class="section-subheading">Step-by-step machine learning workflow designed for retail business sales analytics.</p>
+        </div>
+
+        <div class="workflow-steps-grid">
+          <div class="step-card">
+            <div class="step-number">1</div>
+            <h4 class="step-title">Dataset Ingestion</h4>
+            <p class="step-text">Historical sales data is loaded from the uploaded dataset, verifying order dates, quantities, discounts, and revenues.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">2</div>
+            <h4 class="step-title">Data Preprocessing</h4>
+            <p class="step-text">Transactions are aggregated by month and year. Time indices, calendar months, quarters, and operational averages are created.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">3</div>
+            <h4 class="step-title">Model Training</h4>
+            <p class="step-text">A Linear Regression model is trained using an 80/20 train/test split to fit the underlying secular trend and seasonality patterns.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">4</div>
+            <h4 class="step-title">Feature Extraction</h4>
+            <p class="step-text">When you choose a month from the dropdown, that specific month's feature parameters are retrieved and passed to the model.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">5</div>
+            <h4 class="step-title">Model Forecast</h4>
+            <p class="step-text">The Linear Regression model generates the predicted sales value via the linear coefficients and intercept.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">6</div>
+            <h4 class="step-title">Variance Analysis</h4>
+            <p class="step-text">Actual sales and predicted sales are compared, displaying the exact monetary difference and percentage variance.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Clean Footer -->
+  <footer class="app-footer">
+    <div class="footer-inner">
+      <p><strong>Retail Sales Forecasting and Business Analytics System</strong></p>
+      <p>Research Project by <strong>Lakshana R</strong> • Kumaraguru College of Liberal Arts and Science, Coimbatore</p>
+      <p class="footer-note">Machine Learning Model: Linear Regression • Theme: Orange Executive Presentation</p>
+    </div>
+  </footer>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
