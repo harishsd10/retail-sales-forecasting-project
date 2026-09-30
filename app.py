@@ -21,16 +21,21 @@ MODEL_PATH = os.path.join(BASE_DIR, "model.pkl")
 # Import our ML pipeline function
 from model import load_and_preprocess_data, train_linear_regression
 
-# Instant boot loader
+# Instant boot loader with automatic fallback
 PIPELINE_JSON = os.path.join(BASE_DIR, "pipeline_data.json")
 
-if os.path.exists(PIPELINE_JSON) and os.path.exists(MODEL_PATH):
-    print("Loading precomputed pipeline data and trained model...")
-    with open(PIPELINE_JSON, "r", encoding="utf-8") as f:
-        pipeline_data = json.load(f)
-    model = joblib.load(MODEL_PATH)
-else:
-    print("Training ML model on startup...")
+try:
+    if os.path.exists(PIPELINE_JSON) and os.path.exists(MODEL_PATH):
+        print("Loading precomputed pipeline data and trained model...")
+        with open(PIPELINE_JSON, "r", encoding="utf-8") as f:
+            pipeline_data = json.load(f)
+        model = joblib.load(MODEL_PATH)
+        model.predict([[1, 1, 1, 2014, 284, 0.12]])
+        print("Loaded cached model successfully!")
+    else:
+        raise FileNotFoundError("Cache not found")
+except Exception as e:
+    print(f"Notice: Training model on host ({e})...")
     pipeline_data = train_linear_regression()
     model = pipeline_data['model']
 
@@ -42,6 +47,11 @@ category_sales = pipeline_data['category_sales']
 # Month lookup dictionary by Month_Name
 month_dict = {m['month_name']: m for m in months_data}
 available_months = [m['month_name'] for m in months_data]
+
+@app.route('/healthz')
+@app.route('/health')
+def healthz():
+    return "OK", 200
 
 @app.route('/')
 def home():
